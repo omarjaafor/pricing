@@ -1,0 +1,18 @@
+L'objectif de ce notebook est d'optimiser les prix pour une famille de produits. Il prend en entré un data frame et publie des prix pour chaque produit dans le data frame. 
+Il est important de mettre seulement une famille de produit et une periode de temps (E ou F) par simulation. En revanche, il est possible d'inclure des ventes sur plusieurs années. Il est egalement recommendé (mais pas necessaire) de faire une simulation par PO (essentiels, essenties star, historique)
+Le notebook se base sur l'article suivant : Aviv, Yossi, and Amit Pazgal. "Optimal pricing of seasonal products in the presence of forward-looking consumers." Manufacturing & service operations management 10.3 (2008): 339-359.<http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.476.8707&rep=rep1&type=pdf>
+
+Description algo:
+L'algo considère que l'attractivité du produit se dégrade dans le temps suivant une loi exp inv. 
+On modélise cette degradation. On simule ensuite une population de consommateur (loi normale) centré sur l'appetance initial (aux alentours du prix initial). quand on augmente le prix, moins de consommateur dans la 
+population seront appetant mais la marge augment (inv. baisse). On calul les qty et les marges pour chaque semaine (considérant que l'appetance baisse d'une semaine à l'autre). On prend le prix qui maximise la marge.
+
+
+
+Optim Prix
+    prix_init:=Calcul prix initial #prix semaine lancement
+    alpha_:=Calcul courbe de vente# degradation vente par semaine (en l'occurence degradation appetances/sem)
+    appetances:=Calcul appetance (combien des consomateurs voudraient payer pour ce produit)#Normalement un paramètre
+    prix: optimisation prix (array prix possibles, prix_init, alpha_,population)
+
+#NB : appetances est la valeur moyenne du produit en euro pour une loi normale de consommateurs
